@@ -1,0 +1,391 @@
+export interface Lesson {
+  id: string;
+  title: string;
+  bengaliTitle: string;
+  description: string;
+  content: string;
+  code: string;
+  output: string;
+  moduleId: string;
+  order: number;
+}
+
+export interface Module {
+  id: string;
+  title: string;
+  bengaliTitle: string;
+  description: string;
+  icon: string;
+  color: string;
+  lessons: Lesson[];
+}
+
+export interface Problem {
+  id: string;
+  title: string;
+  bengaliTitle: string;
+  description: string;
+  difficulty: 'Easy' | 'Medium' | 'Hard';
+  inputDescription: string;
+  outputDescription: string;
+  exampleInput: string;
+  exampleOutput: string;
+  solution: string;
+  explanation: string;
+}
+
+export const modules: Module[] = [
+  {
+    id: 'basics',
+    title: 'Basics',
+    bengaliTitle: 'মৌলিক বিষয়',
+    description: 'Kotlin এর ভিত্তি শিখুন - ভেরিয়েবল, ডেটা টাইপ, এবং অপারেটর',
+    icon: '📚',
+    color: 'from-blue-500 to-cyan-500',
+    lessons: [
+      {
+        id: 'basics-1',
+        title: 'Introduction',
+        bengaliTitle: 'পরিচিতি',
+        description: 'Kotlin কি এবং কেন শিখবেন',
+        content: 'Kotlin হল একটি আধুনিক প্রোগ্রামিং ভাষা যা JVM (Java Virtual Machine) এ চলে। এটি Java এর চেয়ে অনেক সহজ এবং নিরাপদ। Google এটাকে Android এর official language হিসেবে সুপারিশ করে।\n\nKotlin এর বৈশিষ্ট্য:\n- Concise: কম কোড লিখে বেশি কিছু করা যায়\n- Safe: Null pointer exceptions দূর করা হয়েছে\n- Interoperable: Java এর সাথে সম্পূর্ণ compatible\n- Functional: Lambda functions এবং higher-order functions সাপোর্ট করে',
+        code: 'fun main() {\n    println("স্বাগতম Kotlin এ!")\n    val language = "Kotlin"\n    println(language + " এ আপনাকে স্বাগত")\n}',
+        output: 'স্বাগতম Kotlin এ!\nKotlin এ আপনাকে স্বাগত',
+        moduleId: 'basics',
+        order: 1,
+      },
+      {
+        id: 'basics-2',
+        title: 'Variables',
+        bengaliTitle: 'চলক (ভেরিয়েবল)',
+        description: 'val এবং var দিয়ে ভেরিয়েবল ডিক্লেয়ার করুন',
+        content: 'Kotlin এ দুই ধরনের ভেরিয়েবল আছে:\n\n1. val (value): একবার assign করা যায়, পরে পরিবর্তন করা যায় না (immutable)\n2. var (variable): যতবার খুশি পরিবর্তন করা যায় (mutable)\n\nBest practice হল val ব্যবহার করা যদি সম্ভব হয়।',
+        code: 'fun main() {\n    val name = "করিম"  // immutable\n    var age = 25       // mutable\n    \n    age = 26           // OK\n    println("নাম: " + name + ", বয়স: " + age)\n}',
+        output: 'নাম: করিম, বয়স: 26',
+        moduleId: 'basics',
+        order: 2,
+      },
+      {
+        id: 'basics-3',
+        title: 'Data Types',
+        bengaliTitle: 'ডেটা টাইপ',
+        description: 'String, Int, Double, Boolean এবং অন্যান্য types',
+        content: 'Kotlin এ বিভিন্ন ডেটা টাইপ আছে:\n\n- Int: পূর্ণ সংখ্যা (-2^31 থেকে 2^31-1)\n- Double: দশমিক সংখ্যা\n- String: পাঠ\n- Boolean: true অথবা false\n- Char: একটি অক্ষর\n\nType inference ব্যবহার করে Kotlin নিজে type নির্ধারণ করে।',
+        code: 'fun main() {\n    val intNumber: Int = 42\n    val doubleNumber: Double = 3.14\n    val text: String = "বাংলাদেশ"\n    val isActive: Boolean = true\n    val character: Char = \'A\'\n    \n    println("Int: " + intNumber)\n    println("Double: " + doubleNumber)\n}',
+        output: 'Int: 42\nDouble: 3.14',
+        moduleId: 'basics',
+        order: 3,
+      },
+      {
+        id: 'basics-4',
+        title: 'Operators',
+        bengaliTitle: 'অপারেটর',
+        description: 'Arithmetic, comparison, এবং logical operators',
+        content: 'Kotlin এ বিভিন্ন অপারেটর আছে:\n\nArithmetic: +, -, *, /, %\nComparison: ==, !=, <, >, <=, >=\nLogical: &&, ||, !\n\nএই অপারেটরগুলো সাধারণ গাণিতিক এবং যুক্তিক অপারেশনের জন্য ব্যবহৃত হয়।',
+        code: 'fun main() {\n    val a = 10\n    val b = 3\n    \n    println(a + b)\n    println(a - b)\n    println(a * b)\n    println(a / b)\n    println(a % b)\n    println(a > b)\n}',
+        output: '13\n7\n30\n3\n1\ntrue',
+        moduleId: 'basics',
+        order: 4,
+      },
+    ],
+  },
+  {
+    id: 'oop',
+    title: 'Object-Oriented Programming',
+    bengaliTitle: 'অবজেক্ট ওরিয়েন্টেড প্রোগ্রামিং',
+    description: 'ক্লাস, অবজেক্ট, এবং Inheritance শিখুন',
+    icon: '🏗️',
+    color: 'from-purple-500 to-pink-500',
+    lessons: [
+      {
+        id: 'oop-1',
+        title: 'Classes and Objects',
+        bengaliTitle: 'ক্লাস এবং অবজেক্ট',
+        description: 'প্রথম ক্লাস তৈরি করুন এবং অবজেক্ট instantiate করুন',
+        content: 'ক্লাস হল একটি blueprint যা অবজেক্ট তৈরি করে। প্রতিটি ক্লাসের properties (ডেটা) এবং methods (ফাংশন) থাকে।\n\nConstructor ব্যবহার করে অবজেক্ট initialize করা হয়।',
+        code: 'class Person(val name: String, var age: Int) {\n    fun greet() {\n        println("আমার নাম " + name)\n    }\n}\n\nfun main() {\n    val person = Person("রহিম", 30)\n    person.greet()\n}',
+        output: 'আমার নাম রহিম',
+        moduleId: 'oop',
+        order: 1,
+      },
+      {
+        id: 'oop-2',
+        title: 'Inheritance',
+        bengaliTitle: 'উত্তরাধিকার (Inheritance)',
+        description: 'একটি ক্লাস থেকে অন্য ক্লাসে property inherit করুন',
+        content: 'Inheritance ব্যবহার করে একটি ক্লাস অন্য ক্লাস থেকে সব property এবং methods পায়। \n\nKotlin এ open keyword ব্যবহার করে একটি ক্লাস inherit করা যায়।',
+        code: 'open class Animal(val name: String) {\n    open fun sound() {\n        println("অবিশ্বাস্য শব্দ")\n    }\n}\n\nclass Dog(name: String) : Animal(name) {\n    override fun sound() {\n        println("ঘেউ ঘেউ")\n    }\n}\n\nfun main() {\n    val dog = Dog("মিক")\n    dog.sound()\n}',
+        output: 'ঘেউ ঘেউ',
+        moduleId: 'oop',
+        order: 2,
+      },
+    ],
+  },
+  {
+    id: 'collections',
+    title: 'Collections',
+    bengaliTitle: 'সংগ্রহ (Collections)',
+    description: 'List, Set, এবং Map নিয়ে কাজ করুন',
+    icon: '📦',
+    color: 'from-green-500 to-emerald-500',
+    lessons: [
+      {
+        id: 'collections-1',
+        title: 'Lists',
+        bengaliTitle: 'তালিকা (Lists)',
+        description: 'List এ items রাখুন এবং iterate করুন',
+        content: 'List একটি ordered collection যেখানে duplicate elements থাকতে পারে।\n\n- listOf(): immutable list তৈরি করে\n- mutableListOf(): mutable list তৈরি করে\n\nList এ add, remove, get operations করা যায়।',
+        code: 'fun main() {\n    val fruits = listOf("আম", "কলা", "আনারস")\n    println("প্রথম ফল: " + fruits[0])\n    \n    val numbers = mutableListOf(1, 2, 3)\n    numbers.add(4)\n    println("সংখ্যা যোগ হয়েছে")\n}',
+        output: 'প্রথম ফল: আম\nসংখ্যা যোগ হয়েছে',
+        moduleId: 'collections',
+        order: 1,
+      },
+    ],
+  },
+  {
+    id: 'advanced',
+    title: 'Advanced',
+    bengaliTitle: 'উন্নত বিষয়',
+    description: 'Lambda functions এবং higher-order functions',
+    icon: '⚡',
+    color: 'from-orange-500 to-red-500',
+    lessons: [
+      {
+        id: 'advanced-1',
+        title: 'Lambda Functions',
+        bengaliTitle: 'Lambda ফাংশন',
+        description: 'সংক্ষিপ্ত anonymous functions লিখুন',
+        content: 'Lambda হল একটি anonymous function যা {} দিয়ে লেখা হয়।\n\nSyntax: { parameter -> body }\n\nLambda এমনকি single-line এ লেখা যায় এবং এটি very powerful।',
+        code: 'fun main() {\n    val add = { a: Int, b: Int -> a + b }\n    println("যোগফল: " + add(5, 3))\n    \n    val numbers = listOf(1, 2, 3, 4, 5)\n    val doubled = numbers.map { it * 2 }\n    println("দ্বিগুণ করা হয়েছে")\n}',
+        output: 'যোগফল: 8\nদ্বিগুণ করা হয়েছে',
+        moduleId: 'advanced',
+        order: 1,
+      },
+    ],
+  },
+  {
+    id: 'android',
+    title: 'Android Framework',
+    bengaliTitle: 'Android Framework',
+    description: 'Jetpack Compose, Lifecycle, এবং Android Libraries',
+    icon: '📱',
+    color: 'from-cyan-500 to-blue-500',
+    lessons: [
+      {
+        id: 'android-1',
+        title: 'Jetpack Compose',
+        bengaliTitle: 'Jetpack Compose',
+        description: 'Modern UI toolkit দিয়ে Android UI তৈরি করুন',
+        content: 'Jetpack Compose হল Google এর modern toolkit যা pure Kotlin দিয়ে Android UI তৈরি করে।\n\nCompose এর সুবিধা:\n- Declarative: UI কিভাবে দেখাবে তা বলুন\n- Reactive: স্বয়ংক্রিয়ভাবে state পরিবর্তনে UI update হয়\n- Intuitive: Kotlin DSL ব্যবহার করে সহজে UI লেখা যায়',
+        code: '@Composable\nfun GreetingScreen() {\n    Column(modifier = Modifier.fillMaxSize()) {\n        Text("স্বাগতম!")\n        Button(onClick = { }) {\n            Text("ক্লিক করুন")\n        }\n    }\n}',
+        output: 'UI Preview: Text এবং Button সহ Column',
+        moduleId: 'android',
+        order: 1,
+      },
+      {
+        id: 'android-2',
+        title: 'Activity Lifecycle',
+        bengaliTitle: 'Activity Lifecycle',
+        description: 'Activity এর জীবনচক্র বুঝুন',
+        content: 'Activity হল Android app এর একটি screen। Activity এর lifecycle বিভিন্ন states এর মধ্য দিয়ে যায়।\n\nMain states:\n- onCreate(): Activity প্রথম তৈরি হয়\n- onStart(): Activity ব্যবহারকারীর কাছে visible হয়\n- onResume(): Activity ফোকাসে আসে\n- onPause(): Activity partially hidden হয়',
+        code: 'class MainActivity : AppCompatActivity() {\n    override fun onCreate(savedInstanceState: Bundle?) {\n        super.onCreate(savedInstanceState)\n        Log.d("MainActivity", "onCreate called")\n    }\n    \n    override fun onResume() {\n        super.onResume()\n        Log.d("MainActivity", "onResume called")\n    }\n}',
+        output: 'Logcat: onCreate called, onResume called',
+        moduleId: 'android',
+        order: 2,
+      },
+    ],
+  },
+  {
+    id: 'professional',
+    title: 'Advanced Professional',
+    bengaliTitle: 'উন্নত পেশাদার বিষয়',
+    description: 'Architecture, Security এবং Performance',
+    icon: '👨‍💻',
+    color: 'from-indigo-500 to-purple-500',
+    lessons: [
+      {
+        id: 'prof-1',
+        title: 'MVVM Architecture',
+        bengaliTitle: 'MVVM আর্কিটেকচার',
+        description: 'Model-View-ViewModel pattern implement করুন',
+        content: 'MVVM হল একটি architectural pattern যা code কে organized এবং maintainable রাখে।\n\nতিনটি layer:\n- Model: ডেটা এবং business logic\n- View: UI elements\n- ViewModel: View এবং Model এর মধ্যে bridge',
+        code: 'class UserViewModel : ViewModel() {\n    private val _users = MutableStateFlow<List<User>>()\n    val users: StateFlow<List<User>> = _users\n    \n    fun loadUsers() {\n        viewModelScope.launch {\n            _users.value = userRepository.getUsers()\n        }\n    }\n}',
+        output: 'Users loaded and displayed',
+        moduleId: 'professional',
+        order: 1,
+      },
+    ],
+  },
+];
+
+export const problems: Problem[] = [
+  {
+    id: 'p1',
+    title: 'Sum of Two Numbers',
+    bengaliTitle: 'দুটি সংখ্যার যোগফল',
+    description: 'দুটি integer input নিয়ে তাদের যোগফল print করুন',
+    difficulty: 'Easy',
+    inputDescription: 'দুটি integer separated by space',
+    outputDescription: 'তাদের যোগফল',
+    exampleInput: '5 3',
+    exampleOutput: '8',
+    solution: 'fun main() {\n    val input = readLine()!!.split(" ")\n    val a = input[0].toInt()\n    val b = input[1].toInt()\n    println(a + b)\n}',
+    explanation: 'readLine() দিয়ে input নিই, split(" ") দিয়ে space এ ভাগ করি, toInt() দিয়ে convert করি।',
+  },
+  {
+    id: 'p2',
+    title: 'Even or Odd',
+    bengaliTitle: 'সংখ্যা জোড় কি বিজোড়',
+    description: 'একটি সংখ্যা input নিয়ে check করুন এটি জোড় না বিজোড়',
+    difficulty: 'Easy',
+    inputDescription: 'একটি integer',
+    outputDescription: '"Even" অথবা "Odd"',
+    exampleInput: '4',
+    exampleOutput: 'Even',
+    solution: 'fun main() {\n    val num = readLine()!!.toInt()\n    if (num % 2 == 0) {\n        println("Even")\n    } else {\n        println("Odd")\n    }\n}',
+    explanation: 'Modulus operator (%) ব্যবহার করে remainder check করি। যদি 0 হয় তাহলে জোড়।',
+  },
+  {
+    id: 'p3',
+    title: 'Maximum of Three',
+    bengaliTitle: 'তিনটির মধ্যে বড়টি খুঁজুন',
+    description: 'তিনটি সংখ্যার মধ্যে সবচেয়ে বড়টি খুঁজে বের করুন',
+    difficulty: 'Easy',
+    inputDescription: 'তিনটি integer separated by space',
+    outputDescription: 'সবচেয়ে বড় সংখ্যা',
+    exampleInput: '10 20 15',
+    exampleOutput: '20',
+    solution: 'fun main() {\n    val input = readLine()!!.split(" ")\n    val a = input[0].toInt()\n    val b = input[1].toInt()\n    val c = input[2].toInt()\n    println(maxOf(a, b, c))\n}',
+    explanation: 'maxOf() function multiple values থেকে maximum return করে।',
+  },
+  {
+    id: 'p4',
+    title: 'Fibonacci Series',
+    bengaliTitle: 'Fibonacci সিরিজ',
+    description: 'প্রথম N সংখ্যা Fibonacci সিরিজ print করুন',
+    difficulty: 'Medium',
+    inputDescription: 'একটি integer N',
+    outputDescription: 'প্রথম N Fibonacci numbers',
+    exampleInput: '5',
+    exampleOutput: '0 1 1 2 3',
+    solution: 'fun main() {\n    val n = readLine()!!.toInt()\n    var a = 0\n    var b = 1\n    for (i in 0 until n) {\n        print(a + " ")\n        val temp = a + b\n        a = b\n        b = temp\n    }\n}',
+    explanation: 'দুটি variable দিয়ে sequence generate করি এবং প্রতিটি number print করি।',
+  },
+  {
+    id: 'p5',
+    title: 'Reverse String',
+    bengaliTitle: 'স্ট্রিং উল্টিয়ে দিন',
+    description: 'একটি স্ট্রিং reverse করুন',
+    difficulty: 'Easy',
+    inputDescription: 'একটি string',
+    outputDescription: 'উল্টানো string',
+    exampleInput: 'hello',
+    exampleOutput: 'olleh',
+    solution: 'fun main() {\n    val str = readLine()!!\n    println(str.reversed())\n}',
+    explanation: 'reversed() function string কে reverse করে দেয়।',
+  },
+  {
+    id: 'p6',
+    title: 'Count Vowels',
+    bengaliTitle: 'স্বরবর্ণ গণনা করুন',
+    description: 'একটি স্ট্রিং এ কত স্বরবর্ণ আছে তা গণনা করুন',
+    difficulty: 'Easy',
+    inputDescription: 'একটি string',
+    outputDescription: 'স্বরবর্ণের সংখ্যা',
+    exampleInput: 'hello',
+    exampleOutput: '2',
+    solution: 'fun main() {\n    val str = readLine()!!\n    val vowels = "aeiouAEIOU"\n    var count = 0\n    for (char in str) {\n        if (char in vowels) count++\n    }\n    println(count)\n}',
+    explanation: 'প্রতিটি character vowels string এ আছে কি না check করি।',
+  },
+  {
+    id: 'p7',
+    title: 'Factorial',
+    bengaliTitle: 'Factorial হিসাব করুন',
+    description: 'একটি সংখ্যার factorial বের করুন',
+    difficulty: 'Medium',
+    inputDescription: 'একটি integer N',
+    outputDescription: 'N এর factorial',
+    exampleInput: '5',
+    exampleOutput: '120',
+    solution: 'fun main() {\n    val n = readLine()!!.toInt()\n    var result = 1\n    for (i in 1..n) result *= i\n    println(result)\n}',
+    explanation: '1 থেকে n পর্যন্ত সব সংখ্যা multiply করি। 5! = 120',
+  },
+  {
+    id: 'p8',
+    title: 'Palindrome Check',
+    bengaliTitle: 'প্যালিন্ড্রোম চেক করুন',
+    description: 'চেক করুন একটি স্ট্রিং palindrome কি না',
+    difficulty: 'Medium',
+    inputDescription: 'একটি string',
+    outputDescription: '"Yes" অথবা "No"',
+    exampleInput: 'racecar',
+    exampleOutput: 'Yes',
+    solution: 'fun main() {\n    val str = readLine()!!\n    val reversed = str.reversed()\n    println(if (str == reversed) "Yes" else "No")\n}',
+    explanation: 'reversed version এর সাথে compare করি।',
+  },
+  {
+    id: 'p9',
+    title: 'Array Sum',
+    bengaliTitle: 'Array উপাদানের সমষ্টি',
+    description: 'একটি array এর সব elements এর যোগফল বের করুন',
+    difficulty: 'Easy',
+    inputDescription: 'N integers separated by space',
+    outputDescription: 'সব সংখ্যার যোগফল',
+    exampleInput: '1 2 3 4 5',
+    exampleOutput: '15',
+    solution: 'fun main() {\n    val numbers = readLine()!!.split(" ").map { it.toInt() }\n    println(numbers.sum())\n}',
+    explanation: 'split() দিয়ে array বানাই, map দিয়ে int convert করি, sum() দিয়ে যোগ করি।',
+  },
+  {
+    id: 'p10',
+    title: 'Remove Duplicates',
+    bengaliTitle: 'Duplicates বাদ দিন',
+    description: 'Array থেকে duplicate elements বাদ দিন',
+    difficulty: 'Medium',
+    inputDescription: 'সংখ্যা সমূহ space দ্বারা পৃথক',
+    outputDescription: 'Unique উপাদান সমূহ',
+    exampleInput: '1 2 2 3 3 3',
+    exampleOutput: '1 2 3',
+    solution: 'fun main() {\n    val numbers = readLine()!!.split(" ").map { it.toInt() }\n    val unique = numbers.toSet().sorted()\n    println(unique.joinToString(" "))\n}',
+    explanation: 'toSet() duplicates remove করে, sorted() করি, joinToString() দিয়ে print করি।',
+  },
+  {
+    id: 'p11',
+    title: 'Prime Number',
+    bengaliTitle: 'Prime সংখ্যা চেক করুন',
+    description: 'চেক করুন একটি সংখ্যা prime কি না',
+    difficulty: 'Medium',
+    inputDescription: 'একটি integer',
+    outputDescription: '"Prime" অথবা "Not Prime"',
+    exampleInput: '7',
+    exampleOutput: 'Prime',
+    solution: 'fun main() {\n    val n = readLine()!!.toInt()\n    if (n < 2) { println("Not Prime"); return }\n    var isPrime = true\n    for (i in 2 until n) {\n        if (n % i == 0) { isPrime = false; break }\n    }\n    println(if (isPrime) "Prime" else "Not Prime")\n}',
+    explanation: '2 থেকে n-1 পর্যন্ত কোন divisor আছে কি না check করি।',
+  },
+  {
+    id: 'p12',
+    title: 'Sort Array',
+    bengaliTitle: 'Array sort করুন',
+    description: 'একটি array ascending order এ sort করুন',
+    difficulty: 'Easy',
+    inputDescription: 'সংখ্যা সমূহ space দ্বারা পৃথক',
+    outputDescription: 'Sorted সংখ্যা সমূহ',
+    exampleInput: '5 2 8 1 9',
+    exampleOutput: '1 2 5 8 9',
+    solution: 'fun main() {\n    val numbers = readLine()!!.split(" ").map { it.toInt() }\n    println(numbers.sorted().joinToString(" "))\n}',
+    explanation: 'sorted() automatically ascending order এ sort করে দেয়।',
+  },
+  {
+    id: 'p13',
+    title: 'Armstrong Number',
+    bengaliTitle: 'Armstrong সংখ্যা',
+    description: 'চেক করুন একটি সংখ্যা Armstrong কি না (153 = 1^3 + 5^3 + 3^3)',
+    difficulty: 'Hard',
+    inputDescription: 'একটি integer',
+    outputDescription: '"Yes" অথবা "No"',
+    exampleInput: '153',
+    exampleOutput: 'Yes',
+    solution: 'fun main() {\n    val num = readLine()!!.toInt()\n    val digits = num.toString().length\n    var sum = 0\n    var temp = num\n    while (temp > 0) {\n        val digit = temp % 10\n        sum += digit.toDouble().pow(digits).toInt()\n        temp /= 10\n    }\n    println(if (sum == num) "Yes" else "No")\n}',
+    explanation: '153 = 1^3 + 5^3 + 3^3। প্রতিটি digit এর power digits count এ raise করে যোগ করি।',
+  },
+];
